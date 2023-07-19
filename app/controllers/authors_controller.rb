@@ -7,8 +7,7 @@ class AuthorsController < ApplicationController
   end
 
   # GET /authors/1 or /authors/1.json
-  def show
-  end
+  def show; end
 
   # GET /authors/new
   def new
@@ -16,8 +15,7 @@ class AuthorsController < ApplicationController
   end
 
   # GET /authors/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /authors or /authors.json
   def create
