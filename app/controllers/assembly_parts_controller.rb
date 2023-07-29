@@ -65,6 +65,6 @@ class AssemblyPartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assembly_part_params
-      params.fetch(:assembly_part, {})
+      params.require(:assembly_part).permit(:assembly_id, :part_id)
     end
 end
