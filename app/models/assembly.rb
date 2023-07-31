@@ -1,3 +1,5 @@
 class Assembly < ApplicationRecord
-  has_and_belongs_to_many :part
+  has_many :part, through: :assembly_parts
+  belongs_to :book
+  has_many :assembly_parts
 end

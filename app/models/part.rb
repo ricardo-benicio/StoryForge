@@ -1,4 +1,5 @@
 class Part < ApplicationRecord
-  has_and_belongs_to_many :assemblies
+  has_many :assembly, through: :assembly_part
   belongs_to :supplier
+  has_many :assembly_part
 end
