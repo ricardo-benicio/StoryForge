@@ -1,5 +1,7 @@
 class AssembliesController < ApplicationController
   before_action :set_assembly, only: %i[ show edit update destroy ]
+  before_action :set_part_id_options, only: %i[ new show edit update destroy ]
+  before_action :set_book_id_options, only: %i[ new show edit update destroy ]
 
   # GET /assemblies or /assemblies.json
   def index
@@ -59,12 +61,18 @@ class AssembliesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_book_id_options
+      @book_id_options = Book.all.pluck(:published_at, :id)
+    end
+    def set_part_id_options
+      @part_id_options = Part.all.pluck(:part_number, :id)
+    end
     def set_assembly
       @assembly = Assembly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def assembly_params
-      params.require(:assembly).permit(:name, :part_id)
+      params.require(:assembly).permit(:name, :part_id, :book_id)
     end
 end
