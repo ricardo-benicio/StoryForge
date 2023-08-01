@@ -16,6 +16,16 @@
     <%= form.text_field :name %>
   </div>
 
+  <div class="field">
+    <%= form.label :part_id, style: "desplay: block" %>
+    <%= form.select("part_id", @part_id_options, include_blank: true) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :book_id, style: "desplay: block" %>
+    <%= form.select("book_id", @book_id_options, include_blank: true) %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>
