@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem 'cpf_cnpj'
+
+gem 'isbn'
+
 # Rspec TEST
 gem 'rspec-rails'
 
