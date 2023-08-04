@@ -16,6 +16,11 @@
     <%= form.datetime_field :published_at %>
   </div>
 
+  <div>
+    <%= form.label :isbn, style: "display: block" %>
+    <%= form.text_field :isbn %>
+  </div>
+
   <div class="field">
     <%= form.label :author_id, style: "display: block" %>
     <%= form.select("author_id", @author_id_options, include_blank: true) %>

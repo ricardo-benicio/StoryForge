@@ -16,6 +16,11 @@
     <%= form.text_field :account_number %>
   </div>
 
+  <div>
+    <%= form.label :digit, style: "display: block" %>
+    <%= form.text_field :digit %>
+  </div>
+
   <div class="field">
     <%= form.label :supplier_id, style: "display: block" %>
     <%= form.select("supplier_id", @supplier_id_options, include_blank: true)%>
