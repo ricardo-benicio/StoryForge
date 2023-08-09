@@ -1,10 +1,12 @@
 module Api
   class AuthorsController < ApplicationController
     #skip_before_action :valid_authenticity_token, only: %i[ create update destroy ]
-    before_action :set_author, only: %i[ show update destroy ]
+    before_action :set_author, only: %i[ index create show update destroy ]
 
     def index
-      @author = Author.all
+      @author = Author.order(:id, :desc)
+
+      render json: @author
     end
 
     def show; end
@@ -37,15 +39,15 @@ module Api
 
     private
     def set_author
-      @author = Author.find(params[:id])
+      @author = Author.find_by(params[:id])
 
-      render @author
+      return if @author
 
       render json: {message: "Author not found."}, status: :not_found
     end
 
     def author_params
-      params.require(:author).permit(:name)
+      params.require(:author).permit(:name, :cpf)
     end
   end
 end
