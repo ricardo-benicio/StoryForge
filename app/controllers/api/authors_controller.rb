@@ -1,6 +1,5 @@
 module Api
-  class AuthorsController < ApplicationController
-    #skip_before_action :valid_authenticity_token, only: %i[ create update destroy ]
+  class AuthorsController < Api::ApiController
     before_action :set_author, only: %i[ index create show update destroy ]
 
     def index
