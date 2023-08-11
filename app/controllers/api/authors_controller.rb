@@ -38,7 +38,7 @@ module Api
 
     private
     def set_author
-      @author = Author.find_by(params[:id])
+      @author = Author.find_by(id: params[:id])
 
       return if @author
 
