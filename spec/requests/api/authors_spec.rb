@@ -30,9 +30,10 @@ RSpec.describe "Api::Authors", type: :request do
         expect do
           post api_authors_path, params: valid_author_params
         end.to change(Author, :count).by(0)
+        #expect(json_response["id"]).to be_present
+        expect(json_response[:name]).to eq("New Author")
+        expect(json_response["cpf"]).to eq("000.000.000-00")
         expect(response).to have_http_status(:created)
-        #expect(json["name"]).to eq("New Author")
-        #expect(json["cpf"]).to eq("000.000.000-00")
 
       end
     end
