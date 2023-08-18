@@ -26,6 +26,14 @@ end
   Supplier.create(cnpj: FFaker::IdentificationBR.cnpj)
 end
 
+suppliers_ids = Supplier.pluck(:id)
+
+suppliers_ids.each do |supplier|
+  account_number = rand(10_000..99_000).to_s
+  account = Account.create(account_number:, supplier_id:)
+  account.update(check_digit: rand(0..9).to_s)
+end
+
 parts = 20.times.map do
   Part.create(part_number: rand(10_000..99_999).to_s,
               supplier_id: Supplier.pluck(:id).sample)
@@ -35,11 +43,14 @@ assemblies = %w[LibreArt BrosLimited KamaDelux DefineEdition GalaxyNo].map do |n
   Assembly.create(name: n)
 end
 
-parts.each { |p| part.assemblies << assemblies.sample(rand(1..5)) }
+parts.each do |part|
+  part.assembly << assemblies.sample(rand(1..5))
+end
 
 5.times do
   random_author_id = Author.pluck(:id).sample
   book = Book.create(published_at: FFaker::Time.between(DateTime.now - 1.year, DateTime.now),
-                     author_id: random_author_id)
-  book.assemblies << assemblies.sample(rand(1..5))
+                     author_id: random_author_id,
+                     title: FFaker::Book.title)
+  #book.assembly << assemblies.sample(rand(1..5))
 end
