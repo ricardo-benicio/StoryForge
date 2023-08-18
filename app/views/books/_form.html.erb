@@ -17,9 +17,15 @@
   </div>
 
   <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
     <%= form.label :isbn, style: "display: block" %>
     <%= form.text_field :isbn %>
   </div>
+
 
   <div class="field">
     <%= form.label :author_id, style: "display: block" %>
