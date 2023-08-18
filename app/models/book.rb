@@ -7,6 +7,6 @@ class Book < ApplicationRecord
 
   private
   def isbn_is_valid?
-    self.isbn = ISBN.as_new(isbn) if isbn.present?
+    self.isbn = ISBN.valid?(isbn) if isbn.present?
   end
 end
