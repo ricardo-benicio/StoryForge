@@ -14,7 +14,7 @@ module Api
     def create
       @author = Author.new(author_params)
 
-      render :create, status: :created if @author.save
+      return render :create, status: :created if @author.save
 
       render json: { errors: @author.errors.full_messages }, status: :unprocessable_entity
     end
