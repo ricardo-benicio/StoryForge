@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :assembly_parts
   resources :assemblies
   resources :parts
   resources :accounts
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
   resources :authors
   root 'dashboard#index'
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :api, defaults: {format: :json} do
+    resources :authors
+  end
 end
