@@ -8,9 +8,9 @@ ruby '3.2.2'
 gem 'bootsnap', require: false
 gem 'cpf_cnpj'
 gem 'importmap-rails'
-gem 'isbn'
+gem 'isbn', '~> 2.0', '>= 2.0.11'
 gem 'jbuilder'
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.4'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.6'
 gem 'sprockets-rails'
@@ -23,7 +23,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'rspec-rails'
-  gem 'rubocop-rails'
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
@@ -33,5 +33,6 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'webdrivers'
 end
