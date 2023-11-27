@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :supplier
 
-  validates :account_number, presence: true, uniqueness: true
+  validates :account_number, presence: true
   validate :account_digit_valid?
 
   private
