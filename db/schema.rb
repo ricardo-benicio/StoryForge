@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_174606) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_27_175551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,17 +27,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_174606) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "part_id", null: false
-    t.bigint "book_id", null: false
-    t.index ["book_id"], name: "index_assemblies_on_book_id"
-    t.index ["part_id"], name: "index_assemblies_on_part_id"
   end
 
   create_table "assembly_parts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "assembly_id", null: false
     t.bigint "part_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["assembly_id"], name: "index_assembly_parts_on_assembly_id"
     t.index ["part_id"], name: "index_assembly_parts_on_part_id"
   end
@@ -63,6 +59,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_174606) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "supplier_id", null: false
+    t.string "name"
+    t.decimal "price"
     t.index ["supplier_id"], name: "index_parts_on_supplier_id"
   end
 
@@ -74,8 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_174606) do
   end
 
   add_foreign_key "accounts", "suppliers"
-  add_foreign_key "assemblies", "books"
-  add_foreign_key "assemblies", "parts"
   add_foreign_key "assembly_parts", "assemblies"
   add_foreign_key "assembly_parts", "parts"
   add_foreign_key "books", "authors"
