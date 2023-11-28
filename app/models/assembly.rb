@@ -1,5 +1,6 @@
 class Assembly < ApplicationRecord
-  has_many :part, through: :assembly_parts
-  belongs_to :book
-  has_many :assembly_parts
+  has_and_belongs_to_many :part
+  has_one :book
+
+  validates :name, presence: true
 end
