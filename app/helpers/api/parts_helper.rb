@@ -1,0 +1,2 @@
+module Api::PartsHelper
+end
