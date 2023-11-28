@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :suppliers
     resources :accounts
     resources :parts
+    resources :assemblies
   end
 end
