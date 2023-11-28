@@ -1,78 +1,58 @@
 class AssembliesController < ApplicationController
-  before_action :set_assembly, only: %i[ show edit update destroy ]
-  before_action :set_part_id_options, only: %i[ new show edit update destroy ]
-  before_action :set_book_id_options, only: %i[ new show edit update destroy ]
+  before_action :set_assembly, only: %i[show edit update destroy]
+  before_action :set_part_id_options, only: %i[new show edit update destroy]
+  before_action :set_book_id_options, only: %i[new show edit update destroy]
 
-  # GET /assemblies or /assemblies.json
   def index
     @assemblies = Assembly.all
   end
 
-  # GET /assemblies/1 or /assemblies/1.json
-  def show
-  end
+  def show; end
 
-  # GET /assemblies/new
   def new
     @assembly = Assembly.new
   end
 
-  # GET /assemblies/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /assemblies or /assemblies.json
   def create
     @assembly = Assembly.new(assembly_params)
-
-    respond_to do |format|
-      if @assembly.save
-        format.html { redirect_to assembly_url(@assembly), notice: "Assembly was successfully created." }
-        format.json { render :show, status: :created, location: @assembly }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @assembly.errors, status: :unprocessable_entity }
-      end
+    if @assembly.save
+      redirect_to assembly_url(@assembly), notice: 'Assembly was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /assemblies/1 or /assemblies/1.json
   def update
-    respond_to do |format|
-      if @assembly.update(assembly_params)
-        format.html { redirect_to assembly_url(@assembly), notice: "Assembly was successfully updated." }
-        format.json { render :show, status: :ok, location: @assembly }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @assembly.errors, status: :unprocessable_entity }
-      end
+    if @assembly.update(assembly_params)
+      redirect_to assembly_url(@assembly), notice: 'Assembly was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /assemblies/1 or /assemblies/1.json
   def destroy
     @assembly.destroy
-
-    respond_to do |format|
-      format.html { redirect_to assemblies_url, notice: "Assembly was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to assemblies_url, notice: 'Assembly was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book_id_options
-      @book_id_options = Book.all.pluck(:published_at, :id)
-    end
-    def set_part_id_options
-      @part_id_options = Part.all.pluck(:part_number, :id)
-    end
-    def set_assembly
-      @assembly = Assembly.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def assembly_params
-      params.require(:assembly).permit(:name, :part_id, :book_id)
-    end
+  def set_book_id_options
+    @book_id_options = Book.all.pluck(:published_at, :id)
+  end
+
+  def set_part_id_options
+    @part_id_options = Part.all.pluck(:part_number, :id)
+  end
+
+  def set_assembly
+    @assembly = Assembly.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def assembly_params
+    params.require(:assembly).permit(:name, :part_id, :book_id)
+  end
 end
