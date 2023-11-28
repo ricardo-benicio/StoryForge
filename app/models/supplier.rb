@@ -1,10 +1,10 @@
-require 'cpf_cnpj'
 class Supplier < ApplicationRecord
   has_one :account
-  has_one :part
+  has_many :part, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 60 }
   validates :cnpj, presence: true, uniqueness: true
+
   before_validation :cnpj_is_valid?
 
   private
